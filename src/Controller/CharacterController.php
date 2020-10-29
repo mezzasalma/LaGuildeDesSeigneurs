@@ -11,7 +11,9 @@ use Symfony\Component\Routing\Annotation\Route;
 class CharacterController extends AbstractController
 {
     /**
-     * @Route("/character/display", name="character_display")
+     * @Route("/character/display",
+     *     name="character_display",
+     *     methods={"GET","HEAD"})
      */
     public function display()
     {

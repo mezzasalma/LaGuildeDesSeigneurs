@@ -1,3 +1,7 @@
+v0.6 Add Delete Route & Tests
+v0.5.1
+v0.5
+v0.4
 v0.3 Service System & Interface
 v0.2
 v0.1

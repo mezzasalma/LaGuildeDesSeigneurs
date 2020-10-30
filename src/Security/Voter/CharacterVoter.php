@@ -10,10 +10,12 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 class CharacterVoter extends Voter
 {
+    public const  CHARACTER_INDEX = 'characterIndex';
     public const CHARACTER_CREATE = 'characterCreate';
     public const CHARACTER_DISPLAY = 'characterDisplay';
 
     private const ATTRIBUTES = array(
+        self::CHARACTER_INDEX,
         self::CHARACTER_CREATE,
         self::CHARACTER_DISPLAY
     );
@@ -31,12 +33,13 @@ class CharacterVoter extends Voter
     {
         //Defines access rights
         switch ($attribute) {
+            case self::CHARACTER_INDEX:
             case self::CHARACTER_CREATE:
                 return $this->canCreate();
                 break;
 
             case self::CHARACTER_DISPLAY:
-                // Peut envoyer $token e $subject pour tester des conditions
+                // Peut envoyer $token en $subject pour tester des conditions
                 return $this->canDisplay(); // $this->>canDisplay($token,$subject)
             break;
         }

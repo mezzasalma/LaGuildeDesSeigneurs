@@ -5,20 +5,25 @@ namespace App\Service;
 
 
 use App\Entity\Character;
+use App\Repository\CharacterRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 class CharacterService implements CharacterServiceInterface
 {
     private $em;
+    private $characterRepository;
 
-    public function __construct(EntityManagerInterface $em)
-    {
+    public function __construct(
+        CharacterRepository $characterRepository,
+        EntityManagerInterface $em
+    ){
+        $this->characterRepository = $characterRepository;
         $this->em = $em;
     }
 
     /**
-     * {@inheritdoc
+     * {@inheritdoc}
      */
     public function create()
     {
@@ -40,5 +45,17 @@ class CharacterService implements CharacterServiceInterface
         $this->em->flush();
 
         return $character;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getAll()
+    {
+        $characterFinal = array();
+        $characters = $this->characterRepository->findAll();
+        foreach ($characters as $character) {
+            $characterFinal[] = $character->toArray();
+        }
     }
 }

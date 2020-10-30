@@ -8,15 +8,21 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class CharacterControllerTest extends WebTestCase
 {
+    private $client;
+
+    public function setUp()
+    {
+        $this->client = static::createClient();
+    }
+
     /**
      * Tests index
      */
     public function testIndex()
     {
-        $client = static::createClient();
-        $client->request('GET','/character/index');
+        $this->client->request('GET','/character/index');
 
-        $this->assertJsonResponse($client->getResponse());
+        $this->assertJsonResponse();
     }
 
     /**
@@ -24,10 +30,9 @@ class CharacterControllerTest extends WebTestCase
      */
     public function testRedirectIndex()
     {
-        $client = static::createClient();
-        $client->request('GET','/character');
+        $this->client->request('GET','/character');
 
-        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+        $this->assertEquals(302, $this->client->getResponse()->getStatusCode());
     }
 
     /**
@@ -35,18 +40,44 @@ class CharacterControllerTest extends WebTestCase
      */
     public function testDisplay()
     {
-        $client = static::createClient();
-        $client->request('GET','/character/display/d6e67912f220523143ec25b972c68a997878ddf3');
+        $this->client->request('GET','/character/display/d6e67912f220523143ec25b972c68a997878ddf3');
 
-        $this->assertJsonResponse($client->getResponse());
+        $this->assertJsonResponse();
     }
 
     /**
      * Asserts that a response is in json
      */
-    public function assertJsonResponse($response)
+    public function assertJsonResponse()
     {
+        $response = $this->client->getResponse();
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertTrue($response->headers->contains('Content-Type','application/json'),$response->headers);
+    }
+
+    /**
+     * Tests bad Identifider
+     */
+    public function testBadIdentifier()
+    {
+        $this->client->request('GET','/character/display/badIdentifier');
+        $this->assertError404($this->client->getResponse()->getStatusCode());
+    }
+
+    /**
+     * Asserts that Response returns 404
+     */
+    public function assertError404($statusCode)
+    {
+        $this->assertEquals(404, $statusCode);
+    }
+
+    /**
+     * Tests inexisting identifier
+     */
+    public function testInexistingIdentifier()
+    {
+        $this->client->request('GET', '/character/display/d6e67912f220523143ec25b972c68a99787error');
+        $this->assertError404($this->client->getREsponse()->getStatusCode());
     }
 }

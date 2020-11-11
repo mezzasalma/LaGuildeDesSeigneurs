@@ -23,7 +23,8 @@
         "symfony/css-selector": "5.1.*",
         "symfony/maker-bundle": "^1.23",
         "symfony/phpunit-bridge": "^5.1",
-        "symfony/var-dumper": "5.1.*"
+        "symfony/var-dumper": "5.1.*",
+      "ext-json": "*"
     },
     "config": {
         "optimize-autoloader": true,

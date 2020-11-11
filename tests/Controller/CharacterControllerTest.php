@@ -34,6 +34,7 @@ class CharacterControllerTest extends WebTestCase
 
     /**
      * Asserts that Response returns 404
+     * @param $statusCode
      */
     public function assertError404($statusCode)
     {

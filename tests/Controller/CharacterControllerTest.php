@@ -18,8 +18,6 @@ class CharacterControllerTest extends WebTestCase
         $this->client = static::createClient();
     }
 
-
-
     /**
      * Asserts that a Response is in json
      */
@@ -96,7 +94,7 @@ class CharacterControllerTest extends WebTestCase
     {
         $this->client->request('GET', '/character/display/d6e67912f220523143ec25b972c68a99787error');
 
-        $this->assertError404($this->client->getREsponse()->getStatusCode());
+        $this->assertError404($this->client->getResponse()->getStatusCode());
     }
 
 

@@ -3,7 +3,6 @@
 
 namespace App\Service;
 
-
 use App\Entity\Character;
 
 interface CharacterServiceInterface
@@ -20,11 +19,13 @@ interface CharacterServiceInterface
 
     /**
      * Modifies the character
+     * @param Character $character
      */
     public function modify(Character $character);
 
     /**
-    * Deletes the character
-    */
+     * Deletes the character
+     * @param Character $character
+     */
     public function delete(Character $character);
 }

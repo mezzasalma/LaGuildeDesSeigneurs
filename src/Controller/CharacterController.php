@@ -42,6 +42,8 @@ class CharacterController extends AbstractController
      *     name="character_display",
      *     requirements={"identifier":"^([a-z0-9]{40})$"},
      *     methods={"GET","HEAD"})
+     * @param Character $character
+     * @return JsonResponse
      */
     public function display(Character $character)
     {
@@ -73,6 +75,8 @@ class CharacterController extends AbstractController
      *     requirements={"identifier":"^([a-z0-9]{40})$"},
      *     methods={"PUT","HEAD"}
      *     )
+     * @param Character $character
+     * @return JsonResponse
      */
     public function modify(Character $character)
     {
@@ -84,12 +88,14 @@ class CharacterController extends AbstractController
     }
 
     /**
-    * @Route("/character/delete/{identifier}",
-    *     name="character_delete",
-    *     requirements={"identifier":"^([a-z0-9]{40})$"},
-    *     methods={"DELETE","HEAD"}
-         *     )
-         */
+     * @Route("/character/delete/{identifier}",
+     *     name="character_delete",
+     *     requirements={"identifier":"^([a-z0-9]{40})$"},
+     *     methods={"DELETE","HEAD"}
+     *     )
+     * @param Character $character
+     * @return JsonResponse
+     */
         public function delete(Character $character)
     {
         $this->denyAccessUnlessGranted('characterDelete', $character);

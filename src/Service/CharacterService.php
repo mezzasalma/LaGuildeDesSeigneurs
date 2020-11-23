@@ -39,6 +39,7 @@ class CharacterService implements CharacterServiceInterface
             ->setImage('https://images.app.goo.gl/qVwoWSZuWrf4C6BE8')
             ->setCreation(new\DateTime('now'))
             ->setIdentifier(hash('sha1',uniqid()))
+            ->setModification(new\DateTime('now'))
         ;
 
         $this->em->persist($character);
@@ -57,6 +58,8 @@ class CharacterService implements CharacterServiceInterface
         foreach ($characters as $character) {
             $characterFinal[] = $character->toArray();
         }
+
+        return $characterFinal;
     }
 
     /**
@@ -73,7 +76,7 @@ class CharacterService implements CharacterServiceInterface
             ->setIntelligence(110)
             ->setLife(13)
             ->setImage('https://images.app.goo.gl/uAQU4XVCSNRkX1CVA')
-            ->setCreation(new\DateTime('now'))
+            ->setModification(new\DateTime('now'))
         ;
 
         $this->em->persist($character);

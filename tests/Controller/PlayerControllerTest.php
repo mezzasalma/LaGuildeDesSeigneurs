@@ -108,7 +108,7 @@ class PlayerControllerTest extends WebTestCase
             array(), // parameters
             array(), // files
             array('CONTENT_TYPE' => 'application/json'), // server
-            '{"firstname":"Maëva","lastname":"Mezzasalma","email":"maeva.mezzasalma@edu.gobelins.fr","age":21,"mirian":270}'
+            '{"firstname":"Maëva","lastname":"Mezzasalma","age":21,"email":"maeva.mezzasalma@edu.gobelins.fr","mirian":270}'
         );
 
         $this->assertJsonResponse();

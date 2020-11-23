@@ -1,3 +1,4 @@
+v0.10 Add Validator Asserts
 v0.9 Add Form & Tests
 v0.8 Add Player Entity - CRUD - Tests
 v0.7 Add field modification

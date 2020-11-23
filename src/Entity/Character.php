@@ -4,7 +4,7 @@ namespace App\Entity;
 
 use App\Repository\CharacterRepository;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Bridge\Doctrine\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=CharacterRepository::class)
@@ -22,26 +22,48 @@ class Character
     /**
      * @ORM\Column(type="string", length=16)
      * @Assert\NotBlank
-     * @Assert\Length
+     * @Assert\Length(
+     *     min = 3,
+     *     max = 16
+     *     )
+     */
+    private $kind;
+
+    /**
+     * @ORM\Column(type="string", length=16)
+     * @Assert\NotBlank
+     * @Assert\Length(
+     *     min = 3,
+     *     max = 16
+     *     )
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=64)
      * @Assert\NotBlank
-     * @Assert\Length
+     * @Assert\Length(
+     *     min = 3,
+     *     max = 64
+     *     )
      */
     private $surname;
 
     /**
      * @ORM\Column(type="string", length=16, nullable=true)
-     * @Assert\Length
+     * @Assert\Length(
+     *     min = 3,
+     *     max = 64
+     *     )
      */
     private $caste;
 
     /**
      * @ORM\Column(type="string", length=16, nullable=true)
-     * @Assert\Length
+     * @Assert\Length(
+     *     min = 3,
+     *     max = 64
+     *     )
      */
     private $knowledge;
 
@@ -57,26 +79,26 @@ class Character
 
     /**
      * @ORM\Column(type="string", length=128, nullable=true)
-     * @Assert\Length
+     * @Assert\Length(
+     *     min = 5,
+     *     max = 128
+     *     )
      */
     private $image;
 
     /**
-     * @ORM\Column(type="string", length=16)
-     * @Assert\NotBlank
+     * @ORM\Column(type="string", length=40)
+     * @Assert\Length(
+     *     min = 40,
+     *     max = 40
+     *     )
      */
-    private $kind;
+    private $identifier;
 
     /**
      * @ORM\Column(type="datetime")
      */
     private $creation;
-
-    /**
-     * @ORM\Column(type="string", length=40)
-     * @Assert\Length
-     */
-    private $identifier;
 
     /**
      * @ORM\Column(type="datetime")

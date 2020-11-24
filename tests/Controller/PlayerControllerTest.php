@@ -139,7 +139,7 @@ class PlayerControllerTest extends WebTestCase
             array(), // parameters
             array(), // files
             array('CONTENT_TYPE' => 'application/json'), // server
-            '{"age":22,"mirian":500}'
+            '{"age":22}'
         );
 
         $this->assertJsonResponse();

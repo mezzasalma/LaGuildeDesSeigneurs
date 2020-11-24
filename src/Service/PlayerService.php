@@ -13,7 +13,8 @@ use Symfony\Component\HttpKernel\Exception\UnprocessableEntityHttpException;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 use LogicException;
-
+use App\Event\PlayerEvent;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class PlayerService implements PlayerServiceInterface
 {
@@ -21,17 +22,20 @@ class PlayerService implements PlayerServiceInterface
     private $playerRepository;
     private $formFactory;
     private $validator;
+    private $dispatcher;
 
     public function __construct(
         PlayerRepository $playerRepository,
         EntityManagerInterface $em,
         FormFactoryInterface $formFactory,
-        ValidatorInterface $validator
+        ValidatorInterface $validator,
+        EventDispatcherInterface $dispatcher
     ) {
         $this->playerRepository = $playerRepository;
         $this->em = $em;
         $this->formFactory = $formFactory;
         $this->validator = $validator;
+        $this->dispatcher = $dispatcher;
     }
 
     /**
@@ -108,6 +112,10 @@ class PlayerService implements PlayerServiceInterface
     public function modify(Player $player, string $data)
     {
         $this->submit($player, PlayerType::class, $data);
+
+        $event = new PlayerEvent($player);
+        $this->dispatcher->dispatch($event, PlayerEvent::PLAYER_MODIFIED);
+
         $this->isEntityFilled($player);
         $player
             ->setModification(new \DateTime('now'))

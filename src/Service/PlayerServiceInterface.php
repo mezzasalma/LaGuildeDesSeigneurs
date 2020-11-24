@@ -20,7 +20,7 @@ interface PlayerServiceInterface
     /**
      * Submits the data to hydrate the object
      */
-    public function submit (Player $player, $formName, $data);
+    public function submit(Player $player, $formName, $data);
 
     /**
      * Gets all the characters

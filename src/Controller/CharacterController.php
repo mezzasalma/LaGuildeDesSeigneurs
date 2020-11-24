@@ -50,25 +50,25 @@ class CharacterController extends AbstractController
     {
 //        dump($character);
 //        dd($character->toArray()); // dump & die donc ne return rien
-        $this->denyAccessUnlessGranted('characterDisplay',$character);
+        $this->denyAccessUnlessGranted('characterDisplay', $character);
 
         return new JsonResponse($character->toArray());
     }
 
-     /**
-      * @Route("/character/create",
-      *     name="character_create",
-      *     methods={"POST","HEAD"}
-      *     )
-      */
-     public function create(Request $request)
-     {
-         $this->denyAccessUnlessGranted('characterCreate', null);
+    /**
+     * @Route("/character/create",
+     *     name="character_create",
+     *     methods={"POST","HEAD"}
+     *     )
+     */
+    public function create(Request $request)
+    {
+        $this->denyAccessUnlessGranted('characterCreate', null);
 
-         $character = $this->characterService->create($request->getContent());
+        $character = $this->characterService->create($request->getContent());
 
-         return new JsonResponse($character->toArray());
-     }
+        return new JsonResponse($character->toArray());
+    }
 
     /**
      * @Route("/character/modify/{identifier}",
@@ -97,7 +97,7 @@ class CharacterController extends AbstractController
      * @param Character $character
      * @return JsonResponse
      */
-        public function delete(Character $character)
+    public function delete(Character $character)
     {
         $this->denyAccessUnlessGranted('characterDelete', $character);
 

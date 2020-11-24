@@ -20,7 +20,7 @@ interface CharacterServiceInterface
     /**
      * Submits the data to hydrate the object
      */
-    public function submit (Character $character, $formName, $data);
+    public function submit(Character $character, $formName, $data);
 
     /**
      * Gets all the characters

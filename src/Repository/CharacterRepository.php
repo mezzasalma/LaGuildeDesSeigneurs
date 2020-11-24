@@ -21,8 +21,8 @@ class CharacterRepository extends ServiceEntityRepository
     public function findOneByIdentifier($identifier)
     {
         return $this->createQueryBuilder('c')
-            ->select('c','p')
-            ->leftJoin('c.player','p')
+            ->select('c', 'p')
+            ->leftJoin('c.player', 'p')
             ->where('c.identifier = :identifier')
             ->setParameter('identifier', $identifier)
             ->getQuery()

@@ -3,7 +3,6 @@
 
 namespace App\Service;
 
-
 use App\Entity\Player;
 use App\Form\PlayerType;
 use App\Repository\PlayerRepository;
@@ -25,8 +24,7 @@ class PlayerService implements PlayerServiceInterface
         EntityManagerInterface $em,
         FormFactoryInterface $formFactory,
         ValidatorInterface $validator
-
-    ){
+    ) {
         $this->playerRepository = $playerRepository;
         $this->em = $em;
         $this->formFactory = $formFactory;
@@ -50,10 +48,11 @@ class PlayerService implements PlayerServiceInterface
     /**
      * {@inheritdoc}
      */
-    public function create(string $data) {
+    public function create(string $data)
+    {
         $player = new Player();
         $player
-            ->setIdentifier(hash('sha1',uniqid()))
+            ->setIdentifier(hash('sha1', uniqid()))
             ->setCreation(new\DateTime('now'))
             ->setModification(new\DateTime('now'))
             ;
@@ -72,7 +71,7 @@ class PlayerService implements PlayerServiceInterface
     public function isEntityFilled(Player $player)
     {
         $errors = $this->validator->validate($player);
-        if(count($errors)>0) {
+        if (count($errors)>0) {
             throw new UnprocessableEntityHttpException((string) $errors. ' Missing data for Entity -> ' . json_encode($player->toArray()));
         }
     }

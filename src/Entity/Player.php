@@ -157,7 +157,7 @@ class Player
     {
         $player = get_object_vars($this);
 
-        if($expand && null !== $this->getCharacters()) {
+        if ($expand && null !== $this->getCharacters()) {
             $characters = array();
             foreach ($this->getCharacters() as $character) {
                 $characters[] = $character->toArray(false);
@@ -166,10 +166,10 @@ class Player
         }
 
         // Specific data
-        if(null !== $player['creation']) {
+        if (null !== $player['creation']) {
             $player['creation'] = $player['creation']->format('Y-m-d H:i:s');
         }
-        if(null !== $player['modification']) {
+        if (null !== $player['modification']) {
             $player['modification'] = $player['modification']->format('Y-m-d H:i:s');
         }
 

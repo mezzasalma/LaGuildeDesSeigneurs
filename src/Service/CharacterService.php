@@ -3,7 +3,6 @@
 
 namespace App\Service;
 
-
 use App\Entity\Character;
 use App\Repository\CharacterRepository;
 use App\Form\CharacterType;
@@ -25,7 +24,7 @@ class CharacterService implements CharacterServiceInterface
         EntityManagerInterface $em,
         FormFactoryInterface $formFactory,
         ValidatorInterface $validator
-    ){
+    ) {
         $this->characterRepository = $characterRepository;
         $this->em = $em;
         $this->formFactory = $formFactory;
@@ -39,7 +38,7 @@ class CharacterService implements CharacterServiceInterface
     {
         $character = new Character();
         $character
-            ->setIdentifier(hash('sha1',uniqid()))
+            ->setIdentifier(hash('sha1', uniqid()))
             ->setCreation(new\DateTime('now'))
             ->setModification(new\DateTime('now'))
         ;
@@ -58,7 +57,7 @@ class CharacterService implements CharacterServiceInterface
     public function isEntityFilled(Character $character)
     {
         $errors = $this->validator->validate($character);
-        if(count($errors)>0) {
+        if (count($errors)>0) {
             throw new UnprocessableEntityHttpException((string) $errors. ' Missing data for Entity -> ' . json_encode($character->toArray()));
         }
     }

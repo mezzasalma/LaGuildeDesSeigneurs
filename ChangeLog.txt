@@ -1,3 +1,4 @@
+v0.11.1 Fixation d'erreurs
 v0.11 Add Association ManyToOne Character to Player
 v0.10 Add Validator Asserts
 v0.9 Add Form & Tests

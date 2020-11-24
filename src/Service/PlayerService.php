@@ -12,6 +12,9 @@ use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpKernel\Exception\UnprocessableEntityHttpException;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
+use LogicException;
+
+
 class PlayerService implements PlayerServiceInterface
 {
     private $em;
@@ -53,8 +56,8 @@ class PlayerService implements PlayerServiceInterface
         $player = new Player();
         $player
             ->setIdentifier(hash('sha1', uniqid()))
-            ->setCreation(new\DateTime('now'))
-            ->setModification(new\DateTime('now'))
+            ->setCreation(new \DateTime('now'))
+            ->setModification(new \DateTime('now'))
             ;
         $this->submit($player, PlayerType::class, $data);
         $this->isEntityFilled($player);
@@ -107,7 +110,7 @@ class PlayerService implements PlayerServiceInterface
         $this->submit($player, PlayerType::class, $data);
         $this->isEntityFilled($player);
         $player
-            ->setModification(new\DateTime('now'))
+            ->setModification(new \DateTime('now'))
         ;
         $this->em->persist($player);
         $this->em->flush();

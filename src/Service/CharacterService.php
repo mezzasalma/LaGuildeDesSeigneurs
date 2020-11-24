@@ -3,6 +3,7 @@
 
 namespace App\Service;
 
+
 use App\Entity\Character;
 use App\Repository\CharacterRepository;
 use App\Form\CharacterType;
@@ -11,6 +12,9 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpKernel\Exception\UnprocessableEntityHttpException;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
+
+use LogicException;
+
 
 class CharacterService implements CharacterServiceInterface
 {
@@ -24,7 +28,7 @@ class CharacterService implements CharacterServiceInterface
         EntityManagerInterface $em,
         FormFactoryInterface $formFactory,
         ValidatorInterface $validator
-    ) {
+    ){
         $this->characterRepository = $characterRepository;
         $this->em = $em;
         $this->formFactory = $formFactory;
@@ -38,9 +42,9 @@ class CharacterService implements CharacterServiceInterface
     {
         $character = new Character();
         $character
-            ->setIdentifier(hash('sha1', uniqid()))
-            ->setCreation(new\DateTime('now'))
-            ->setModification(new\DateTime('now'))
+            ->setIdentifier(hash('sha1',uniqid()))
+            ->setCreation(new \DateTime('now'))
+            ->setModification(new \DateTime('now'))
         ;
         $this->submit($character, CharacterType::class, $data);
         $this->isEntityFilled($character);
@@ -57,7 +61,7 @@ class CharacterService implements CharacterServiceInterface
     public function isEntityFilled(Character $character)
     {
         $errors = $this->validator->validate($character);
-        if (count($errors)>0) {
+        if(count($errors)>0) {
             throw new UnprocessableEntityHttpException((string) $errors. ' Missing data for Entity -> ' . json_encode($character->toArray()));
         }
     }
@@ -107,7 +111,7 @@ class CharacterService implements CharacterServiceInterface
         $this->submit($character, CharacterType::class, $data);
         $this->isEntityFilled($character);
         $character
-            ->setModification(new\DateTime('now'))
+            ->setModification(new \DateTime('now'))
         ;
 
         $this->em->persist($character);

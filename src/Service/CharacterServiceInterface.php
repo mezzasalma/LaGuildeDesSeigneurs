@@ -13,8 +13,13 @@ interface CharacterServiceInterface
     public function create(string $data);
 
     /**
- * Checks if the entity has been well filled
- */
+     * Creates the character from html form
+     */
+    public function createFromHtml(Character $character);
+
+    /**
+     * Checks if the entity has been well filled
+     */
     public function isEntityFilled(Character $character);
 
     /**

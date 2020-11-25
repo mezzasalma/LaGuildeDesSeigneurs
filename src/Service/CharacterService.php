@@ -45,13 +45,23 @@ class CharacterService implements CharacterServiceInterface
     public function create(string $data)
     {
         $character = new Character();
+
+        $this->submit($character, CharacterType::class, $data);
+
+        return $this->createFromHtml(($character));
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function createFromHtml(Character $character) {
         $character
             ->setIdentifier(hash('sha1',uniqid()))
             ->setCreation(new \DateTime('now'))
             ->setModification(new \DateTime('now'))
         ;
-        $this->submit($character, CharacterType::class, $data);
 
+        //Dispatch event
         $event = new CharacterEvent($character);
         $this->dispatcher->dispatch($event, CharacterEvent::CHARACTER_CREATED);
 
@@ -117,6 +127,15 @@ class CharacterService implements CharacterServiceInterface
     public function modify(Character $character, string $data)
     {
         $this->submit($character, CharacterType::class, $data);
+
+        return $this->modifyFromHtml(($character));
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function modifyFromHtml(Character $character) {
+
         $this->isEntityFilled($character);
         $character
             ->setModification(new \DateTime('now'))

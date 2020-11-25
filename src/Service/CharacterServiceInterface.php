@@ -33,6 +33,11 @@ interface CharacterServiceInterface
     public function getAll();
 
     /**
+     * Gets all the characters with intelligence greater than or equal to a number
+     */
+    public function getByIntelligence(int $intelligence);
+
+    /**
      * Modifies the character
      * @param Character $character
      */

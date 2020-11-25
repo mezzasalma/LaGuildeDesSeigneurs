@@ -18,6 +18,7 @@ class CharacterRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Character::class);
     }
+
     public function findOneByIdentifier($identifier)
     {
         return $this->createQueryBuilder('c')
@@ -27,6 +28,17 @@ class CharacterRepository extends ServiceEntityRepository
             ->setParameter('identifier', $identifier)
             ->getQuery()
             ->getOneOrNullResult()
+            ;
+    }
+
+    public function findAllByIntelligence($intelligence)
+    {
+        return $this->createQueryBuilder('c')
+            ->select('c')
+            ->where('c.intelligence >= :intelligence')
+            ->setParameter('intelligence', $intelligence)
+            ->getQuery()
+            ->getResult()
             ;
     }
     // /**

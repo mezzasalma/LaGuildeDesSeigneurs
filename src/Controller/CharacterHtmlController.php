@@ -75,6 +75,18 @@ class CharacterHtmlController extends AbstractController
     }
 
     /**
+     * @Route("/show/intelligence/{intelligence}", name="character_showByIntelligence", methods={"GET"})
+     */
+    public function showByIntelligence(int $intelligence, CharacterRepository $characterRepository): Response
+    {
+        $this->denyAccessUnlessGranted('characterIndex');
+
+        return $this->render('character/showByIntelligence.html.twig', [
+            'characters' => $characterRepository->findAllByIntelligence($intelligence),
+        ]);
+    }
+
+    /**
      * @Route("/{id}/edit", name="character_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, Character $character): Response

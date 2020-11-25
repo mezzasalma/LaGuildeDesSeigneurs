@@ -113,9 +113,27 @@ class CharacterService implements CharacterServiceInterface
     public function getAll()
     {
         $characterFinal = array();
+
         $characters = $this->characterRepository->findAll();
+
         foreach ($characters as $character) {
             $characterFinal[] = $character->toArray();
+        }
+
+        return $characterFinal;
+    }
+
+    /**
+    * {@inheritdoc}
+    */
+    public function getByIntelligence(int $intelligence)
+    {
+        $characterFinal = array();
+
+        $characters = $this->characterRepository->findAllByIntelligence($intelligence);
+
+        foreach ($characters as $character) {
+                $characterFinal[] = $character->toArray();
         }
 
         return $characterFinal;
